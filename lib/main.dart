@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_mobile/screens/login_form.dart';
+// import 'package:projeto_mobile/screens/login_form.dart';
 
-import 'database/database.dart';
-import 'models/user.dart';
+// import 'database/database.dart';
+// import 'models/user.dart';
+import 'screens/players_list.dart';
 
 void main() {
   runApp(MyApp());
-  save(
-    UserModel(
-      nome: 'daniel',
-      idade: 24,
-      posicao: 'meia',
-      telefone: '123456789',
-      user: 'daniel',
-      email: 'daniel@gmail.com',
-      password: '1234',
-    ),
-  ).then((value) => findAll().then((users) => debugPrint(users.toString())));
+  // save(
+  //   UserModel(
+  //     nome: 'daniel',
+  //     idade: 24,
+  //     posicao: 'meia',
+  //     telefone: '123456789',
+  //     user: 'daniel',
+  //     email: 'daniel@gmail.com',
+  //     password: '1234',
+  //   ),
+  // ).then((value) => findAll().then((users) => debugPrint(users.toString())));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginForm(),
+      home: PlayersList(),
     );
   }
 }

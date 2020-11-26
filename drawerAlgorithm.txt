@@ -1,0 +1,142 @@
+
+ class Player {
+  String name;
+  int rating;
+
+  Player(this.name, this.rating);
+
+  @override
+  String toString() {
+    return '{ ${this.name}, ${this.rating} }';
+  }
+}
+
+class Drafts {
+  int type;
+  int rating;
+
+  Drafts(this.type, this.rating);
+
+  @override
+  String toString() {
+    return '{ ${this.type}, ${this.rating} }';
+  }
+}
+
+main() {
+  List players = [];
+  players.add(Player('Renato', 4));
+  players.add(Player('Daniel', 3));
+  players.add(Player('Márcio', 2));
+  players.add(Player('Júlio', 1));
+  players.add(Player('Edu', 4));
+  players.add(Player('Andre', 3));
+  players.add(Player('Tiago', 2));
+  players.add(Player('Arthur', 1));
+  players.add(Player('Felipe', 2));
+  players.add(Player('Luiz', 1));
+  //ordenando players do maior para o menor
+  players.sort((a, b) => b.rating.compareTo(a.rating));
+  //chamando função que sorteia os times
+  drawTeams(players);
+}
+
+void drawTeams(players){
+  
+  List<int> draftOrder = [];
+  List drafts = [];
+  drafts.add(Drafts(1,draftType1(players).abs()));
+  drafts.add(Drafts(2,draftType2(players).abs()));
+  drafts.add(Drafts(3,draftType3(players).abs()));
+  drafts.add(Drafts(4,draftType4(players).abs()));
+  //ordenando os tipos de sorteio para o que a diferença deu a mais próxima de 0
+  drafts.sort((a, b) => a.rating.compareTo(b.rating)); 
+  //colancando a ordem do draft com a menor diferença perto em um array
+  draftOrder = draftOrder1(drafts.elementAt(0).rating);
+  print('Time 1: ');
+  // for loop with item index
+  for (var i = 0; i <=4 ; i++) {
+    print(players.elementAt(draftOrder[i]).name.toString());
+  }
+  print('--------------');
+  print('Time 2: ');
+  for (var i = 5; i <=9 ; i++) {
+    print(players.elementAt(draftOrder[i]).name.toString());
+  }
+}
+//somando e subtraindo os times para obter a menor diferença possível
+int draftType1(players){
+  var drawerRating = 0;
+  drawerRating = 
+      (players.elementAt(0).rating 
+      + players.elementAt(3).rating
+      + players.elementAt(4).rating
+      + players.elementAt(7).rating
+      + players.elementAt(9).rating) 
+    - (players.elementAt(1).rating 
+       + players.elementAt(2).rating
+       + players.elementAt(5).rating
+       + players.elementAt(6).rating
+       + players.elementAt(8).rating); 
+  return drawerRating;
+}
+
+int draftType2(players){
+  var drawerRating = 0;
+  drawerRating = 
+      (players.elementAt(0).rating 
+      + players.elementAt(2).rating
+      + players.elementAt(4).rating
+      + players.elementAt(6).rating
+      + players.elementAt(8).rating) 
+    - (players.elementAt(1).rating 
+       + players.elementAt(3).rating
+       + players.elementAt(5).rating
+       + players.elementAt(7).rating
+       + players.elementAt(9).rating); 
+  return drawerRating;
+}
+int draftType3(players){
+  var drawerRating = 0;
+  drawerRating = 
+      (players.elementAt(0).rating 
+      + players.elementAt(4).rating
+      + players.elementAt(5).rating
+      + players.elementAt(6).rating
+      + players.elementAt(7).rating) 
+    - (players.elementAt(1).rating 
+       + players.elementAt(2).rating
+       + players.elementAt(3).rating
+       + players.elementAt(8).rating
+       + players.elementAt(9).rating); 
+  return drawerRating;
+}
+int draftType4(players){
+  var drawerRating = 0;
+  drawerRating = 
+      (players.elementAt(0).rating 
+      + players.elementAt(1).rating
+      + players.elementAt(7).rating
+      + players.elementAt(8).rating
+      + players.elementAt(9).rating) 
+    - (players.elementAt(2).rating 
+       + players.elementAt(3).rating
+       + players.elementAt(4).rating
+       + players.elementAt(5).rating
+       + players.elementAt(6).rating); 
+  return drawerRating;
+}
+//colocando a ordem do menor draft possível num array;
+List draftOrder1(draftStyle){
+  List<int> intList = [];
+  if(draftStyle==1){
+    intList = [0,3,4,7,9,1,2,5,6,8];
+  }else if(draftStyle==2){
+    intList = [0,2,4,6,8,1,3,5,7,9];
+  }else if(draftStyle==3){
+    intList = [0,4,5,6,7,1,2,3,8,9];
+  }else{
+    intList = [0,1,7,8,9,2,3,4,5,6];
+  }
+  return intList;
+}

@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_mobile/components/custom_textField.dart';
+import 'package:projeto_mobile/models/player.dart';
 
-class CadastroForm extends StatelessWidget {
+class CadastroForm extends StatefulWidget {
+  @override
+  _CadastroFormState createState() => _CadastroFormState();
+}
+
+class _CadastroFormState extends State<CadastroForm> {
+  List<String> _locations = ['1', '2', '3', '4', '5']; // Option 2
+  String _selectedLocation; // Option 2
+  TextEditingController inputNome = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightGreenAccent[400],
+      backgroundColor: Colors.lightGreenAccent[700],
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: SingleChildScrollView(
@@ -15,38 +25,26 @@ class CadastroForm extends StatelessWidget {
             children: [
               CustomTextField(
                 label: 'Nome',
-                controller: null,
+                controller: inputNome,
                 padding: 24.0,
               ),
-              CustomTextField(
-                label: 'Telefone',
-                controller: null,
-                padding: 24.0,
-              ),
-              CustomTextField(
-                label: 'Posição',
-                controller: null,
-                padding: 24.0,
-              ),
-              CustomTextField(
-                label: 'Idade',
-                controller: null,
-                padding: 24.0,
-              ),
-              CustomTextField(
-                label: 'Email',
-                controller: null,
-                padding: 24.0,
-              ),
-              CustomTextField(
-                label: 'User',
-                controller: null,
-                padding: 24.0,
-              ),
-              CustomTextField(
-                label: 'Password',
-                controller: null,
-                padding: 24.0,
+              SizedBox(
+                width: double.maxFinite,
+                child: DropdownButton(
+                  hint: Text('Selecione o rating do jogador'),
+                  value: _selectedLocation,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _selectedLocation = newValue;
+                    });
+                  },
+                  items: _locations.map((location) {
+                    return DropdownMenuItem(
+                      child: new Text(location),
+                      value: location,
+                    );
+                  }).toList(),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 64.0),
@@ -61,7 +59,15 @@ class CadastroForm extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      String nome = inputNome.text;
+                      int rating = int.tryParse(_selectedLocation);
+
+                      if (nome != null && rating != null) {
+                        final playerCriado = Player(nome, rating);
+                        Navigator.pop(context, playerCriado);
+                      }
+                    },
                   ),
                 ),
               ),

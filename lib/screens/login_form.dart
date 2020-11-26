@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_mobile/components/custom_textField.dart';
-import 'package:projeto_mobile/models/user.dart';
+// import 'package:projeto_mobile/models/user.dart';
 
 import 'cadastro_form.dart';
 
@@ -52,14 +52,7 @@ class LoginForm extends StatelessWidget {
                       'Entrar',
                       style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () {
-                      final String login = _userController.text;
-                      final String password = _passwordController.text;
-
-                      sorteio();
-
-                      // final User user = User(1, login, password);
-                    },
+                    onPressed: () {},
                   ),
                 ),
               ),
