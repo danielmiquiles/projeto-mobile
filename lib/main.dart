@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:projeto_mobile/screens/login_form.dart';
-
-// import 'database/database.dart';
-// import 'models/user.dart';
 import 'screens/players_list.dart';
 
 void main() {

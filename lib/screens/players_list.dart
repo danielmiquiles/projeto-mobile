@@ -18,6 +18,9 @@ class PlayersList extends StatefulWidget {
     Player('André', 5),
   ];
 
+  List<Player> _presentes = [];
+  bool checked = false;
+
   @override
   _PlayersListState createState() => _PlayersListState();
 }
@@ -35,7 +38,13 @@ class _PlayersListState extends State<PlayersList> {
         ),
         actions: [
           IconButton(icon: Icon(Icons.people), onPressed: () {}),
-          Checkbox(value: true, onChanged: (value) {}),
+          Checkbox(
+              value: widget.checked,
+              onChanged: (value) {
+                setState(() {
+                  widget.checked = value;
+                });
+              }),
         ],
       ),
       body: ListView.builder(

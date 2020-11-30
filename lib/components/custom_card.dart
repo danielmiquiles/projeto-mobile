@@ -4,8 +4,12 @@ import 'package:projeto_mobile/models/player.dart';
 class CustomCard extends StatelessWidget {
   final String name;
   final int rating;
+  List<Player> presentes = [];
 
-  const CustomCard(this.name, this.rating);
+  CustomCard(
+    this.name,
+    this.rating,
+  );
 
   @override
   Widget build(BuildContext context) {
