@@ -3,6 +3,8 @@ import 'package:projeto_mobile/components/custom_card.dart';
 import 'package:projeto_mobile/models/player.dart';
 import 'package:projeto_mobile/screens/cadastro_form.dart';
 
+import 'draw.dart';
+
 class PlayersList extends StatefulWidget {
   List<Player> _players = [
     Player('Daniel', 3),
@@ -37,13 +39,38 @@ class _PlayersListState extends State<PlayersList> {
           style: TextStyle(color: Colors.white),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.people), onPressed: () {}),
+          IconButton(icon: Icon(Icons.people), onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => Draw(players: widget._presentes,),));
+          }),
           Checkbox(
               value: widget.checked,
               onChanged: (value) {
-                setState(() {
-                  widget.checked = value;
-                });
+
+                if(value){
+
+                  for (var player in widget._players) {
+                    player.present = value;
+
+                    setState(() {
+                      widget.checked = value;
+                      widget._presentes.add(player);                    
+                    });
+                  }
+                } else {
+
+                  for (var player in widget._players) {
+                    player.present = value;
+
+                    setState(() {
+                      widget.checked = value;
+                      widget._presentes.remove(player);                    
+                    });
+                  }
+
+                }
+                
               }),
         ],
       ),
@@ -51,7 +78,45 @@ class _PlayersListState extends State<PlayersList> {
         itemCount: widget._players.length,
         itemBuilder: (context, index) {
           final player = widget._players[index];
-          return CustomCard(player.name, player.rating);
+          final rating = player.rating;
+          return Card(
+            child: ListTile(
+              leading: Icon(Icons.people),
+              title: Text(player.name),
+              subtitle: Text('Mensal'),
+              trailing: SizedBox(
+                width: 150,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('$rating'),
+                    Checkbox(
+                      value: player.present,
+                      onChanged: (value) {
+
+                        if(value){
+                          setState(() {
+                            widget._presentes.add(player);
+                          });
+                          player.present = value;
+                        } else {
+                          setState(() {
+                            widget._presentes.remove(player);
+                          });
+                          
+                          player.present = value;
+                        }
+                        
+                        print(widget._presentes.toString());
+
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
         },
       ),
       floatingActionButton: FloatingActionButton(

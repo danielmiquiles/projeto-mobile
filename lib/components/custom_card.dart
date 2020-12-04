@@ -27,7 +27,9 @@ class CustomCard extends StatelessWidget {
               Text('$rating'),
               Checkbox(
                 value: false,
-                onChanged: (value) {},
+                onChanged: (value) {
+
+                },
               ),
             ],
           ),
