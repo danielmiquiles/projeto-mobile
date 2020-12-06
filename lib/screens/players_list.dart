@@ -6,6 +6,7 @@ import 'package:projeto_mobile/screens/cadastro_form.dart';
 import 'package:projeto_mobile/components/alerts.dart';
 
 import 'draw.dart';
+import 'draw.dart';
 
 class PlayersList extends StatefulWidget {
   List<Player> _players = [
@@ -42,6 +43,28 @@ class _PlayersListState extends State<PlayersList> {
         ),
         actions: [
           IconButton(
+            icon: Icon(Icons.add), 
+            onPressed: (){
+
+              final Future<Player> future =
+              Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return CadastroForm();
+            },
+          ));
+          future.then((playerCriado) {
+            if (playerCriado != null) {
+              setState(() {
+                widget._players.add(playerCriado);
+              });
+            }
+            print(widget._players);
+          });
+
+            },
+          ),
+          
+          IconButton(
               icon: Icon(Icons.people),
               onPressed: () {
                 if (widget._presentes.length < 10) {
@@ -51,7 +74,16 @@ class _PlayersListState extends State<PlayersList> {
                   widget._presentes
                       .sort((a, b) => b.rating.compareTo(a.rating));
                   //drawTeams retorna uma lista com 10 nomes, do 0 ao 4 é o time 1 e do 5 ao 9 time 2
-                  print(drawTeams(widget._presentes));
+                  // print(drawTeams(widget._presentes));
+                  List time = drawTeams(widget._presentes);
+                  // print(time);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context){
+                        return Draw(players: time,);
+                      }
+                    ),
+                  );
                 }
                 /* Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => Draw(
@@ -136,29 +168,6 @@ class _PlayersListState extends State<PlayersList> {
             ),
           );
         },
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        onPressed: () {
-          final Future<Player> future =
-              Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) {
-              return CadastroForm();
-            },
-          ));
-          future.then((playerCriado) {
-            if (playerCriado != null) {
-              setState(() {
-                widget._players.add(playerCriado);
-              });
-            }
-            print(widget._players);
-          });
-        },
-        child: Icon(
-          Icons.add,
-          color: Colors.greenAccent[700],
-        ),
       ),
     );
   }
