@@ -108,7 +108,7 @@ class _DrawState extends State<Draw> {
                         Padding(padding: EdgeInsets.all(16.0)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [                            
+                          children: [
                             Text(
                               "$minutesStr:$secondsStr",
                               style: TextStyle(
@@ -134,7 +134,6 @@ class _DrawState extends State<Draw> {
                             ),
                             Padding(padding: EdgeInsets.all(4.0)),
                             Container(
-                              
                               child: Text(
                                 '$placarTime2',
                                 style: TextStyle(fontSize: 200.0),
@@ -217,23 +216,25 @@ class _DrawState extends State<Draw> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
                       onPressed: () {
-                        timerStream = stopWatchStream();
-                        timerSubscription = timerStream.listen((int newTick) {
-                          setState(() {
-                            hoursStr = ((newTick / (60 * 60)) % 60)
-                                .floor()
-                                .toString()
-                                .padLeft(2, '0');
-                            minutesStr = ((newTick / 60) % 60)
-                                .floor()
-                                .toString()
-                                .padLeft(2, '0');
-                            secondsStr = (newTick % 60)
-                                .floor()
-                                .toString()
-                                .padLeft(2, '0');
+                        if (timerStream == null) {
+                          timerStream = stopWatchStream();
+                          timerSubscription = timerStream.listen((int newTick) {
+                            setState(() {
+                              hoursStr = ((newTick / (60 * 60)) % 60)
+                                  .floor()
+                                  .toString()
+                                  .padLeft(2, '0');
+                              minutesStr = ((newTick / 60) % 60)
+                                  .floor()
+                                  .toString()
+                                  .padLeft(2, '0');
+                              secondsStr = (newTick % 60)
+                                  .floor()
+                                  .toString()
+                                  .padLeft(2, '0');
+                            });
                           });
-                        });
+                        }
                       },
                       color: Colors.black,
                       child: Icon(
