@@ -87,230 +87,132 @@ class _DrawState extends State<Draw> {
     }
 
     return Scaffold(
-        backgroundColor: Colors.greenAccent[700],
-        appBar: AppBar(
-          title: Text("Acompanhar Jogo"),
-          backgroundColor: Colors.black,
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    //color: Colors.red,
-                    height: 350,
-                    child: Column(
-                      children: [
-                        Padding(padding: EdgeInsets.all(16.0)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "$minutesStr:$secondsStr",
-                              style: TextStyle(
-                                fontSize: 60.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              child: Text(
-                                '$placarTime1',
-                                style: TextStyle(fontSize: 200.0),
-                              ),
-                            ),
-                            Padding(padding: EdgeInsets.all(4.0)),
-                            Text(
-                              'X',
-                              style: TextStyle(fontSize: 30),
-                            ),
-                            Padding(padding: EdgeInsets.all(4.0)),
-                            Container(
-                              child: Text(
-                                '$placarTime2',
-                                style: TextStyle(fontSize: 200.0),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Column(
-                  //   children: [
-                  //     Text(
-                  //       'Placar',
-                  //       style: TextStyle(
-                  //         fontSize: 60.0,
-                  //       ),
-                  //     ),
-                  //     Text(
-                  //       "$placarTime1 x $placarTime2",
-                  //       style: TextStyle(
-                  //         fontSize: 60.0,
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  // Container(
-                  //   //width: 50%,
-                  //   child: Card(
-                  //     child: Column(
-                  //       children: [
-                  //         Text(
-                  //           'Placar',
-                  //           style: TextStyle(
-                  //             fontSize: 60.0,
-                  //           ),
-                  //         ),
-                  //         Text(
-                  //           "$placarTime1 x $placarTime2",
-                  //           style: TextStyle(
-                  //             fontSize: 60.0,
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //     //color: Colors.lightGreen,
-                  //     elevation: 5,
-                  //   ),
-                  // ),
-                  // Container(
-                  //   //width: 50%,
-                  //   child: Card(
-                  //     child: Column(
-                  //       children: [
-                  //         Text(
-                  //           'Tempo',
-                  //           style: TextStyle(
-                  //             fontSize: 60.0,
-                  //           ),
-                  //         ),
-                  //         Text(
-                  //           "$minutesStr:$secondsStr",
-                  //           style: TextStyle(
-                  //             fontSize: 60.0,
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //     color: Colors.lightGreen,
-                  //     elevation: 5,
-                  //   ),
-                  // ),
-                ],
-              ),
-              SizedBox(height: 20.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RaisedButton(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                      onPressed: () {
-                        if (timerStream == null) {
-                          timerStream = stopWatchStream();
-                          timerSubscription = timerStream.listen((int newTick) {
-                            setState(() {
-                              hoursStr = ((newTick / (60 * 60)) % 60)
-                                  .floor()
-                                  .toString()
-                                  .padLeft(2, '0');
-                              minutesStr = ((newTick / 60) % 60)
-                                  .floor()
-                                  .toString()
-                                  .padLeft(2, '0');
-                              secondsStr = (newTick % 60)
-                                  .floor()
-                                  .toString()
-                                  .padLeft(2, '0');
-                            });
-                          });
-                        }
-                      },
-                      color: Colors.black,
-                      child: Icon(
-                        Icons.play_arrow,
-                        color: Colors.white,
-                      )
-                      // child: Text(
-                      //   'Início',
-                      //   style: TextStyle(
-                      //     color: Colors.white,
-                      //     fontSize: 20.0,
-                      //   ),
-                      // ),
-                      ),
-                  SizedBox(width: 40.0),
-                  RaisedButton(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                      onPressed: () {
-                        timerSubscription.cancel();
-                        timerStream = null;
-                        setState(() {
-                          hoursStr = '00';
-                          minutesStr = '00';
-                          secondsStr = '00';
-                        });
-                      },
-                      color: Colors.black,
-                      child: Icon(
-                        Icons.replay,
-                        color: Colors.white,
-                      )
-                      // child: Text(
-                      //   'Reiniciar',
-                      //   style: TextStyle(
-                      //     color: Colors.white,
-                      //     fontSize: 20.0,
-                      //   ),
-                      // ),
-                      ),
-                ],
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Card(
-                    child: Container(
-                      width: 170,
-                      color: Colors.blue,
-                      child: Column(
+      backgroundColor: Colors.greenAccent[700],
+      appBar: AppBar(
+        title: Text("Acompanhar Jogo"),
+        backgroundColor: Colors.black,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  //color: Colors.red,
+                  height: 350,
+                  child: Column(
+                    children: [
+                      Padding(padding: EdgeInsets.all(16.0)),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: time1.map((name) {
-                          return Text(
-                            name,
-                            style: TextStyle(fontSize: 30),
-                          );
-                        }).toList(),
+                        children: [
+                          Text(
+                            "$minutesStr:$secondsStr",
+                            style: TextStyle(
+                              fontSize: 60.0,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            child: Text(
+                              '$placarTime1',
+                              style: TextStyle(fontSize: 200.0),
+                            ),
+                          ),
+                          Padding(padding: EdgeInsets.all(4.0)),
+                          Text(
+                            'X',
+                            style: TextStyle(fontSize: 30),
+                          ),
+                          Padding(padding: EdgeInsets.all(4.0)),
+                          Container(
+                            child: Text(
+                              '$placarTime2',
+                              style: TextStyle(fontSize: 200.0),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  Padding(padding: EdgeInsets.all(4.0)),
-                  Text(
-                    'X',
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  Padding(padding: EdgeInsets.all(4.0)),
-                  Container(
+                ),
+              ],
+            ),
+            SizedBox(height: 20.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RaisedButton(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                    onPressed: () {
+                      if (timerStream == null) {
+                        timerStream = stopWatchStream();
+                        timerSubscription = timerStream.listen((int newTick) {
+                          setState(() {
+                            hoursStr = ((newTick / (60 * 60)) % 60)
+                                .floor()
+                                .toString()
+                                .padLeft(2, '0');
+                            minutesStr = ((newTick / 60) % 60)
+                                .floor()
+                                .toString()
+                                .padLeft(2, '0');
+                            secondsStr = (newTick % 60)
+                                .floor()
+                                .toString()
+                                .padLeft(2, '0');
+                          });
+                        });
+                      }
+                    },
+                    color: Colors.black,
+                    child: Icon(
+                      Icons.play_arrow,
+                      color: Colors.white,
+                    )),
+                SizedBox(width: 40.0),
+                RaisedButton(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
+                    onPressed: () {
+                      timerSubscription.cancel();
+                      timerStream = null;
+                      setState(() {
+                        hoursStr = '00';
+                        minutesStr = '00';
+                        secondsStr = '00';
+                      });
+                    },
+                    color: Colors.black,
+                    child: Icon(
+                      Icons.replay,
+                      color: Colors.white,
+                    )),
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Card(
+                  child: Container(
                     width: 170,
-                    color: Colors.red[300],
+                    color: Colors.blue,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: time2.map((name) {
+                      children: time1.map((name) {
                         return Text(
                           name,
                           style: TextStyle(fontSize: 30),
@@ -318,89 +220,55 @@ class _DrawState extends State<Draw> {
                       }).toList(),
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
-        ),
-        floatingActionButton: Stack(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: 31),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: FloatingActionButton(
-                  backgroundColor: Colors.blue,
-                  onPressed: incrementTime1,
-                  child: Icon(Icons.add),
                 ),
-              ),
+                Padding(padding: EdgeInsets.all(4.0)),
+                Text(
+                  'X',
+                  style: TextStyle(fontSize: 30),
+                ),
+                Padding(padding: EdgeInsets.all(4.0)),
+                Container(
+                  width: 170,
+                  color: Colors.red[300],
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: time2.map((name) {
+                      return Text(
+                        name,
+                        style: TextStyle(fontSize: 30),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              ],
             ),
-            Align(
-              alignment: Alignment.bottomRight,
+          ],
+        ),
+      ),
+      floatingActionButton: Stack(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(left: 31),
+            child: Align(
+              alignment: Alignment.bottomLeft,
               child: FloatingActionButton(
-                backgroundColor: Colors.red[300],
-                onPressed: incrementTime2,
-                heroTag: null,
+                backgroundColor: Colors.blue,
+                onPressed: incrementTime1,
                 child: Icon(Icons.add),
               ),
             ),
-          ],
-        ));
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: FloatingActionButton(
+              backgroundColor: Colors.red[300],
+              onPressed: incrementTime2,
+              heroTag: null,
+              child: Icon(Icons.add),
+            ),
+          ),
+        ],
+      ),
+    );
   }
-  /* @override
-  Widget build(BuildContext context) {
-    List<String> time1 = List();
-    List<String> time2 = List();
-
-    for (var i = 0; i < widget.players.length; i++) {
-      if (i < 5) {
-        time1.add(widget.players[i]);
-      } else {
-        time2.add(widget.players[i]);
-      }
-    }
-
-    return Scaffold(
-        backgroundColor: Colors.greenAccent[600],
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Text(
-            'Sorteio dos Times',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-        body: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: time1.map((name) {
-                  return Text(
-                    name,
-                    style: TextStyle(fontSize: 30),
-                  );
-                }).toList(),
-              ),
-              Padding(padding: EdgeInsets.all(24.0)),
-              Text(
-                'X',
-                style: TextStyle(fontSize: 30),
-              ),
-              Padding(padding: EdgeInsets.all(24.0)),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: time2.map((name) {
-                  return Text(
-                    name,
-                    style: TextStyle(fontSize: 30),
-                  );
-                }).toList(),
-              ),
-            ],
-          ),
-        ));
-  }*/
 }
